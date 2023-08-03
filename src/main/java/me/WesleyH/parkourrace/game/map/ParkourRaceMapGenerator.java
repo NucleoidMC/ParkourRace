@@ -44,8 +44,7 @@ public class ParkourRaceMapGenerator {
                     done = true;
                 }
             }
-            System.out.println(map.checkpoints);
-            System.out.println("Done!");
+            map.finish = template.getMetadata().getFirstRegionBounds("finish");
             return map;
 
         }

@@ -16,6 +16,7 @@ public class ParkourRaceMap {
     private final ParkourRaceMapConfig config;
     public BlockBounds spawn;
     public ArrayList<BlockBounds> checkpoints = new ArrayList<>();
+    public BlockBounds finish;
     private final BlockBounds bounds;
 
     public ParkourRaceMap(MapTemplate template, ParkourRaceMapConfig config) {

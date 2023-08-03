@@ -39,7 +39,8 @@ public class ParkourRaceActive {
     private final boolean ignoreWinState;
     private final ParkourRaceTimerBar timerBar;
     private final ServerWorld world;
-    private final HashMap<ServerPlayerEntity, BlockBounds> playerCurCheckpoint= new HashMap<>();
+    private boolean gameWon = false;
+
 
     private ParkourRaceActive(GameSpace gameSpace, ServerWorld world, ParkourRaceMap map, GlobalWidgets widgets, ParkourRaceConfig config, Set<PlayerRef> participants) {
         this.gameSpace = gameSpace;
@@ -95,14 +96,14 @@ public class ParkourRaceActive {
             ref.ifOnline(this.world, this::spawnParticipant);
         }
         for (ServerPlayerEntity entity : this.gameSpace.getPlayers()){
-            playerCurCheckpoint.put(entity, null);
+            spawnLogic.playerCurCheckpoint.put(entity, null);
         }
         this.stageManager.onOpen(this.world.getTime(), this.config);
         // TODO setup logic
     }
 
     private void onClose() {
-        // TODO teardown logic
+        this.gameSpace.close(GameCloseReason.FINISHED);
     }
 
     private void addPlayer(ServerPlayerEntity player) {
@@ -169,12 +170,17 @@ public class ParkourRaceActive {
 
             for (BlockBounds checkpointBound : this.gameMap.checkpoints){
                 if (player != null && checkpointBound.contains(player.getBlockPos()) &&
-                        (this.playerCurCheckpoint.get(player) == null ||
-                        !this.playerCurCheckpoint.get(player).equals(checkpointBound))){
-                    this.playerCurCheckpoint.put(player, checkpointBound);
-                    System.out.println(playerCurCheckpoint);
+                        (spawnLogic.playerCurCheckpoint.get(player) == null ||
+                        !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))){
+                    spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
+                    System.out.println(spawnLogic.playerCurCheckpoint);
                     player.sendMessage(Text.literal("Checkpoint " + checkpointBound.toString()));
                 }
+            }
+
+            if (player != null && gameMap.finish.contains(player.getBlockPos()) && !gameWon) {
+                player.sendMessage(Text.literal("You win!"));
+                this.broadcastWin(new WinResult(player, true));
             }
         }
 
@@ -195,6 +201,8 @@ public class ParkourRaceActive {
         PlayerSet players = this.gameSpace.getPlayers();
         players.sendMessage(message);
         players.playSound(SoundEvents.ENTITY_VILLAGER_YES);
+        onClose();
+
     }
 
     private WinResult checkWinResult() {
