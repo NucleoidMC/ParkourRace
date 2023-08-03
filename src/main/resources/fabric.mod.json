@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "parkourrace",
+  "version": "${version}",
+  "name": "Parkour-Race",
+  "description": "Parkour race game",
+  "authors": [
+    "Wesley Hoy"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.WesleyH.parkourrace.ParkourRace"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*",
+    "minecraft": "1.20.1",
+    "plasmid": ">=0.5.0"
+  }
+}

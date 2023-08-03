@@ -1,0 +1,13 @@
+{
+  "type": "parkourrace:parkourrace",
+  "name": "Parkour Race: Boxed",
+  "icon": "minecraft:feather",
+  "map": {
+    "id": "parkourrace:boxed"
+  },
+  "players": {
+    "min": 1,
+    "max": 100
+  },
+  "time_limit_secs": 60
+}
