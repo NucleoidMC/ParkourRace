@@ -1,0 +1,13 @@
+{
+  "type": "parkourrace:parkourrace",
+  "name": "Parkour Race: Test",
+  "icon": "minecraft:feather",
+  "map": {
+    "id": "parkourrace:test"
+  },
+  "players": {
+    "min": 1,
+    "max": 100
+  },
+  "time_limit_secs": 600
+}
