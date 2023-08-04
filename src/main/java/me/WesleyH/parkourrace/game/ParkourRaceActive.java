@@ -118,7 +118,6 @@ public class ParkourRaceActive {
 
     private ActionResult onPlayerDamage(ServerPlayerEntity player, DamageSource source, float amount) {
         // TODO handle damage
-        this.spawnParticipant(player);
         return ActionResult.FAIL;
     }
 
