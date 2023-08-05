@@ -35,7 +35,7 @@ public class ParkourRaceSpawnLogic {
 
         player.addStatusEffect(new StatusEffectInstance(
                 StatusEffects.NIGHT_VISION,
-                20 * 60 * 60,
+                StatusEffectInstance.INFINITE,
                 1,
                 true,
                 false
@@ -44,7 +44,6 @@ public class ParkourRaceSpawnLogic {
 
     public void spawnPlayer(ServerPlayerEntity player) {
         // TODO: Investigate
-        System.out.println("Spawning player...");
         BlockBounds spawn = this.map.spawn;
         if (spawn == null) {
             ParkourRace.LOGGER.error("Cannot spawn player! No spawn is defined in the map!");
@@ -54,8 +53,6 @@ public class ParkourRaceSpawnLogic {
         float y;
         float z;
         if (playerCurCheckpoint.get(player) == null){
-            System.out.println(spawn.max().getX() + " " + spawn.min().getX());
-            System.out.println(spawn.max().getZ() + " " + spawn.min().getZ());
             x = (spawn.max().getX() + spawn.min().getX()) /2F;
             z = (spawn.max().getZ() + spawn.min().getZ()) /2F;
             y = spawn.max().getY() + 0.5F;

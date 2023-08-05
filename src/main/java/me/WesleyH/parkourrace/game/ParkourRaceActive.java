@@ -99,7 +99,6 @@ public class ParkourRaceActive {
             spawnLogic.playerCurCheckpoint.put(entity, null);
         }
         this.stageManager.onOpen(this.world.getTime(), this.config);
-        // TODO setup logic
     }
 
     private void onClose() {
@@ -117,12 +116,10 @@ public class ParkourRaceActive {
     }
 
     private ActionResult onPlayerDamage(ServerPlayerEntity player, DamageSource source, float amount) {
-        // TODO handle damage
         return ActionResult.FAIL;
     }
 
     private ActionResult onPlayerDeath(ServerPlayerEntity player, DamageSource source) {
-        // TODO handle death
         this.spawnParticipant(player);
         return ActionResult.FAIL;
     }
@@ -163,23 +160,24 @@ public class ParkourRaceActive {
         BlockBounds mapBounds = this.gameMap.getBounds();
 
         for (ServerPlayerEntity player : this.gameSpace.getPlayers()) {
-            if (player != null && !mapBounds.contains(player.getBlockPos())) {
-                spawnLogic.spawnPlayer(player);
-            }
-
-            for (BlockBounds checkpointBound : this.gameMap.checkpoints){
-                if (player != null && checkpointBound.contains(player.getBlockPos()) &&
-                        (spawnLogic.playerCurCheckpoint.get(player) == null ||
-                        !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))){
-                    spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
-                    System.out.println(spawnLogic.playerCurCheckpoint);
-                    player.sendMessage(Text.literal("Checkpoint " + checkpointBound.toString()));
+            if (player != null && !player.isSpectator()) {
+                if (!mapBounds.contains(player.getBlockPos())) {
+                    spawnLogic.spawnPlayer(player);
                 }
-            }
+                int i = 0;
+                for (BlockBounds checkpointBound : this.gameMap.checkpoints) {
+                    i++;
+                    if (checkpointBound.contains(player.getBlockPos()) &&
+                            (spawnLogic.playerCurCheckpoint.get(player) == null ||
+                                    !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))) {
+                        spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
+                        this.gameSpace.getPlayers().sendMessage(Text.of(Text.literal(player.getDisplayName().getString()) + " has reached checkpoint " + i));
+                    }
+                }
 
-            if (player != null && gameMap.finish.contains(player.getBlockPos()) && !gameWon) {
-                player.sendMessage(Text.literal("You win!"));
-                this.broadcastWin(new WinResult(player, true));
+                if (gameMap.finish.contains(player.getBlockPos()) && !gameWon) {
+                    this.broadcastWin(new WinResult(player, true));
+                }
             }
         }
 
@@ -211,8 +209,6 @@ public class ParkourRaceActive {
         }
 
         ServerPlayerEntity winningPlayer = null;
-
-        // TODO win result logic
         return WinResult.no();
     }
 

@@ -24,12 +24,8 @@ public class ParkourRaceMapGenerator {
 
     public ParkourRaceMap build(MinecraftServer server) throws GameOpenException {
         try {
-            System.out.println("loading map template");
             var template = MapTemplateSerializer.loadFromResource(server, this.config.id());
-            System.out.println("Registering map");
             ParkourRaceMap map = new ParkourRaceMap(template, this.config);
-
-            System.out.println("Registering spawns");
             map.spawn = template.getMetadata().getFirstRegionBounds("spawn");
             map.checkpoints = new ArrayList<>();
             boolean done = false;
@@ -37,7 +33,6 @@ public class ParkourRaceMapGenerator {
             while (!done){
                 BlockBounds checkpoint = template.getMetadata().getFirstRegionBounds("checkpoint_" + i);
                 if (checkpoint != null){
-                    System.out.println("added checkpoint " + i);
                     map.checkpoints.add(checkpoint);
                     i++;
                 }else {
@@ -49,7 +44,6 @@ public class ParkourRaceMapGenerator {
 
         }
         catch (IOException e) {
-            System.out.println(e);
             throw new GameOpenException(Text.literal("Failed to load map"));
         }
     }
