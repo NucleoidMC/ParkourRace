@@ -22,6 +22,7 @@ public class ParkourRaceStageManager {
     private long startTime = -1;
     private final Object2ObjectMap<ServerPlayerEntity, FrozenPlayer> frozen;
     private boolean setSpectator = false;
+    private boolean pvpEnabled = false;
 
     public ParkourRaceStageManager() {
         this.frozen = new Object2ObjectOpenHashMap<>();
@@ -97,13 +98,18 @@ public class ParkourRaceStageManager {
             PlayerSet players = space.getPlayers();
 
             if (sec > 0) {
-                players.showTitle(Text.literal(Integer.toString(sec)).formatted(Formatting.BOLD), 20);
+                players.showTitle(Text.literal(Integer.toString(sec)).formatted(Formatting.GREEN), 20);
                 players.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0F, 1.0F);
             } else {
-                players.showTitle(Text.literal("Go!").formatted(Formatting.BOLD), 20);
-                players.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0F, 2.0F);
+                players.showTitle(Text.literal("GO").formatted(Formatting.GOLD), 20);
+                players.playSound(SoundEvents.BLOCK_BELL_RESONATE, SoundCategory.PLAYERS, 1.0F, 2.0F);
+                pvpEnabled = true;
             }
         }
+    }
+
+    public boolean isPvpEnabled() {
+        return pvpEnabled;
     }
 
     public static class FrozenPlayer {

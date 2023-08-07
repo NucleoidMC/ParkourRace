@@ -72,18 +72,18 @@ public class ParkourRaceSpawnLogic {
             ParkourRace.LOGGER.error("Cannot spawn player! No spawn is defined in the map!");
             return;
         }
-        float x;
-        float y;
-        float z;
+        double x;
+        double y;
+        double z;
         if (playerCurCheckpoint.get(player) == null){
-            x = (spawn.max().getX() + spawn.min().getX()) /2F;
-            z = (spawn.max().getZ() + spawn.min().getZ()) /2F;
-            y = spawn.max().getY() + 0.5F;
+            x = (spawn.max().getX() + spawn.min().getX()) /2.0;
+            z = (spawn.max().getZ() + spawn.min().getZ()) /2.0;
+            y = spawn.max().getY();
         }else{
             BlockBounds checkpoint = playerCurCheckpoint.get(player);
-            x = (checkpoint.max().getX() + checkpoint.min().getX()) /2F;
-            z = (checkpoint.max().getZ() + checkpoint.min().getZ()) /2F;
-            y = checkpoint.max().getY() + 0.5F;
+            x = (checkpoint.max().getX() + checkpoint.min().getX()) /2.0;
+            z = (checkpoint.max().getZ() + checkpoint.min().getZ()) /2.0;
+            y = checkpoint.max().getY();
         }
         player.teleport(this.world, x, y, z, 0.0F, 0.0F);
     }

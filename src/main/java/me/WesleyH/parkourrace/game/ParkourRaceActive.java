@@ -140,7 +140,7 @@ public class ParkourRaceActive {
     }
 
     private ActionResult onPlayerDamage(ServerPlayerEntity player, DamageSource source, float amount) {
-        if (source.getAttacker() != null && source.getAttacker().isPlayer() && config.mapConfig().pvp()){
+        if (source.getAttacker() != null && source.getAttacker().isPlayer() && config.mapConfig().pvp() && stageManager.isPvpEnabled()){
             player.setHealth(20.0F);
             return ActionResult.SUCCESS;
         }
@@ -197,9 +197,10 @@ public class ParkourRaceActive {
                     i++;
                     if (checkpointBound.contains(player.getBlockPos()) &&
                             (spawnLogic.playerCurCheckpoint.get(player) == null ||
-                                    !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))) {
+                            !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))) {
                         spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
-                        this.gameSpace.getPlayers().sendMessage(Text.of(Text.literal(player.getDisplayName().getString()) + " has reached checkpoint " + i));
+                        this.gameSpace.getPlayers().sendMessage((
+                        Text.literal(player.getDisplayName().getString() + " has reached checkpoint " + i)));
                     }
                 }
 
