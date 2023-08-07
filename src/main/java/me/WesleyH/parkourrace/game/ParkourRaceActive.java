@@ -30,6 +30,7 @@ import me.WesleyH.parkourrace.game.map.ParkourRaceMap;
 import xyz.nucleoid.stimuli.event.player.PlayerDamageEvent;
 import xyz.nucleoid.stimuli.event.player.PlayerDeathEvent;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,7 +48,7 @@ public class ParkourRaceActive {
     public final GameSpace gameSpace;
     private final ParkourRaceMap gameMap;
 
-    private final Object2ObjectMap<PlayerRef, ParkourRacePlayer> participants;
+    private final List<PlayerRef> participants;
     private final ParkourRaceSpawnLogic spawnLogic;
     private final ParkourRaceStageManager stageManager;
     private final boolean ignoreWinState;
@@ -61,12 +62,10 @@ public class ParkourRaceActive {
         this.config = config;
         this.gameMap = map;
         this.spawnLogic = new ParkourRaceSpawnLogic(world, map, config.mapConfig().effects());
-        this.participants = new Object2ObjectOpenHashMap<>();
+        this.participants = new ArrayList<>();
         this.world = world;
 
-        for (PlayerRef player : participants) {
-            this.participants.put(player, new ParkourRacePlayer());
-        }
+        this.participants.addAll(participants);
 
         this.stageManager = new ParkourRaceStageManager();
         this.ignoreWinState = this.participants.size() <= 1;
@@ -115,7 +114,7 @@ public class ParkourRaceActive {
     }
 
     private void onOpen() {
-        for (PlayerRef ref : this.participants.keySet()) {
+        for (PlayerRef ref : this.participants) {
             ref.ifOnline(this.world, this::spawnParticipant);
         }
         for (ServerPlayerEntity entity : this.gameSpace.getPlayers()){
@@ -129,7 +128,7 @@ public class ParkourRaceActive {
     }
 
     private void addPlayer(ServerPlayerEntity player) {
-        if (!this.participants.containsKey(PlayerRef.of(player))) {
+        if (!this.participants.contains(PlayerRef.of(player))) {
             this.spawnSpectator(player);
         }
         this.teams.addPlayerTo(player, TEAM.key());
@@ -200,7 +199,7 @@ public class ParkourRaceActive {
                             !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))) {
                         spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
                         this.gameSpace.getPlayers().sendMessage((
-                        Text.literal(player.getDisplayName().getString() + " has reached checkpoint " + i)));
+                        Text.literal("§6§lCHECKPOINT! §a" + player.getDisplayName().getString() + " §7has reached checkpoint §e" + i)));
                     }
                 }
 
