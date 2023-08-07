@@ -1,5 +1,9 @@
 package me.WesleyH.parkourrace.game;
 
+import me.WesleyH.parkourrace.game.map.ParkourRaceMapEffectConfig;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import xyz.nucleoid.map_templates.BlockBounds;
 import xyz.nucleoid.plasmid.game.GameSpace;
@@ -14,18 +18,19 @@ import me.WesleyH.parkourrace.ParkourRace;
 import me.WesleyH.parkourrace.game.map.ParkourRaceMap;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class ParkourRaceSpawnLogic {
-    private final GameSpace gameSpace;
     private final ParkourRaceMap map;
     private final ServerWorld world;
+    private final List<ParkourRaceMapEffectConfig> effects;
 
     public final HashMap<ServerPlayerEntity, BlockBounds> playerCurCheckpoint= new HashMap<>();
 
-    public ParkourRaceSpawnLogic(GameSpace gameSpace, ServerWorld world, ParkourRaceMap map) {
-        this.gameSpace = gameSpace;
+    public ParkourRaceSpawnLogic(ServerWorld world, ParkourRaceMap map, List<ParkourRaceMapEffectConfig> effects) {
         this.map = map;
         this.world = world;
+        this.effects = effects;
     }
 
     public void resetPlayer(ServerPlayerEntity player, GameMode gameMode) {
@@ -40,6 +45,28 @@ public class ParkourRaceSpawnLogic {
                 true,
                 false
         ));
+
+        for (ParkourRaceMapEffectConfig effect : effects){
+            StatusEffect statusEffect = Registries.STATUS_EFFECT.get(effect.effect());
+            if (statusEffect != null) {
+                if (effect.duration() == 0){
+                    player.addStatusEffect(new StatusEffectInstance(statusEffect,
+                            StatusEffectInstance.INFINITE,
+                            effect.amplifier(),
+                            true,
+                            false));
+                }else{
+                    player.addStatusEffect(new StatusEffectInstance(statusEffect,
+                            effect.duration(),
+                            effect.amplifier(),
+                            true,
+                            false));
+                }
+
+            }
+        }
+
+
     }
 
     public void spawnPlayer(ServerPlayerEntity player) {

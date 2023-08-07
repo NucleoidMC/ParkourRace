@@ -27,7 +27,7 @@ public class ParkourRaceWaiting {
         this.map = map;
         this.config = config;
         this.world = world;
-        this.spawnLogic = new ParkourRaceSpawnLogic(gameSpace, world, map);
+        this.spawnLogic = new ParkourRaceSpawnLogic(world, map, config.mapConfig().effects());
     }
 
     public static GameOpenProcedure open(GameOpenContext<ParkourRaceConfig> context) {

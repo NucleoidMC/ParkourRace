@@ -46,7 +46,7 @@ public class ParkourRaceActive {
         this.gameSpace = gameSpace;
         this.config = config;
         this.gameMap = map;
-        this.spawnLogic = new ParkourRaceSpawnLogic(gameSpace, world, map);
+        this.spawnLogic = new ParkourRaceSpawnLogic(world, map, config.mapConfig().effects());
         this.participants = new Object2ObjectOpenHashMap<>();
         this.world = world;
 
@@ -180,9 +180,6 @@ public class ParkourRaceActive {
                 }
             }
         }
-
-
-
     }
 
     private void broadcastWin(WinResult result) {

@@ -3,7 +3,8 @@
   "name": "Parkour Race: Test",
   "icon": "minecraft:feather",
   "map": {
-    "id": "parkourrace:test"
+    "id": "parkourrace:test",
+    "effects": []
   },
   "players": {
     "min": 1,

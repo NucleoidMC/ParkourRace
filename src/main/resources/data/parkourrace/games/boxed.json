@@ -3,7 +3,12 @@
   "name": "Parkour Race: Boxed",
   "icon": "minecraft:feather",
   "map": {
-    "id": "parkourrace:boxed"
+    "id": "parkourrace:boxed",
+    "effects": [{
+      "effect": "minecraft:speed",
+      "duration": 0,
+      "amplifier": 0
+    }]
   },
   "players": {
     "min": 1,
