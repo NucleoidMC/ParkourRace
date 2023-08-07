@@ -90,6 +90,8 @@ public class ParkourRaceActive {
             game.setRule(GameRuleType.PORTALS, ActionResult.FAIL);
             if (!config.mapConfig().pvp()){
                 game.setRule(GameRuleType.PVP, ActionResult.FAIL);
+            }else {
+                game.setRule(GameRuleType.PVP, ActionResult.SUCCESS);
             }
             game.setRule(GameRuleType.HUNGER, ActionResult.FAIL);
             game.setRule(GameRuleType.FALL_DAMAGE, ActionResult.FAIL);
@@ -138,6 +140,10 @@ public class ParkourRaceActive {
     }
 
     private ActionResult onPlayerDamage(ServerPlayerEntity player, DamageSource source, float amount) {
+        if (source.getAttacker() != null && source.getAttacker().isPlayer() && config.mapConfig().pvp()){
+            player.setHealth(20.0F);
+            return ActionResult.SUCCESS;
+        }
         return ActionResult.FAIL;
     }
 
