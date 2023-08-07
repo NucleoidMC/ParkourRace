@@ -1,18 +1,14 @@
 package me.WesleyH.parkourrace.game.map;
 
-import net.minecraft.block.Block;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 import xyz.nucleoid.map_templates.BlockBounds;
 import xyz.nucleoid.map_templates.MapTemplate;
 import xyz.nucleoid.map_templates.MapTemplateSerializer;
-import net.minecraft.util.math.BlockPos;
 import xyz.nucleoid.plasmid.game.GameOpenException;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class ParkourRaceMapGenerator {
 

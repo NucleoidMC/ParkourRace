@@ -2,12 +2,18 @@ package me.WesleyH.parkourrace.game;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import me.WesleyH.parkourrace.ParkourRace;
+import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Vec3d;
 import xyz.nucleoid.map_templates.BlockBounds;
 import xyz.nucleoid.plasmid.game.GameCloseReason;
 import xyz.nucleoid.plasmid.game.GameSpace;
 import xyz.nucleoid.plasmid.game.common.GlobalWidgets;
+import xyz.nucleoid.plasmid.game.common.team.GameTeam;
+import xyz.nucleoid.plasmid.game.common.team.GameTeamConfig;
+import xyz.nucleoid.plasmid.game.common.team.GameTeamKey;
+import xyz.nucleoid.plasmid.game.common.team.TeamManager;
 import xyz.nucleoid.plasmid.game.event.GameActivityEvents;
 import xyz.nucleoid.plasmid.game.event.GamePlayerEvents;
 import xyz.nucleoid.plasmid.game.player.PlayerSet;
@@ -30,6 +36,14 @@ import java.util.stream.Collectors;
 public class ParkourRaceActive {
     public final ParkourRaceConfig config;
 
+    private static final GameTeam TEAM = new GameTeam(
+            new GameTeamKey(ParkourRace.ID),
+            GameTeamConfig.builder()
+                    .setName(Text.literal("Mineout"))
+                    .setCollision(AbstractTeam.CollisionRule.NEVER)
+                    .build()
+    );
+
     public final GameSpace gameSpace;
     private final ParkourRaceMap gameMap;
 
@@ -39,10 +53,10 @@ public class ParkourRaceActive {
     private final boolean ignoreWinState;
     private final ParkourRaceTimerBar timerBar;
     private final ServerWorld world;
-    private boolean gameWon = false;
+    private final TeamManager teams;
 
 
-    private ParkourRaceActive(GameSpace gameSpace, ServerWorld world, ParkourRaceMap map, GlobalWidgets widgets, ParkourRaceConfig config, Set<PlayerRef> participants) {
+    private ParkourRaceActive(GameSpace gameSpace, ServerWorld world, ParkourRaceMap map, GlobalWidgets widgets, ParkourRaceConfig config, Set<PlayerRef> participants, TeamManager teams) {
         this.gameSpace = gameSpace;
         this.config = config;
         this.gameMap = map;
@@ -57,6 +71,9 @@ public class ParkourRaceActive {
         this.stageManager = new ParkourRaceStageManager();
         this.ignoreWinState = this.participants.size() <= 1;
         this.timerBar = new ParkourRaceTimerBar(widgets);
+
+        this.teams = teams;
+        teams.addTeam(TEAM);
     }
 
     public static void open(GameSpace gameSpace, ServerWorld world, ParkourRaceMap map, ParkourRaceConfig config) {
@@ -64,12 +81,16 @@ public class ParkourRaceActive {
             Set<PlayerRef> participants = gameSpace.getPlayers().stream()
                     .map(PlayerRef::of)
                     .collect(Collectors.toSet());
+
             GlobalWidgets widgets = GlobalWidgets.addTo(game);
-            ParkourRaceActive active = new ParkourRaceActive(gameSpace, world, map, widgets, config, participants);
+            TeamManager teams = TeamManager.addTo(game);
+            ParkourRaceActive active = new ParkourRaceActive(gameSpace, world, map, widgets, config, participants, teams);
 
             game.setRule(GameRuleType.CRAFTING, ActionResult.FAIL);
             game.setRule(GameRuleType.PORTALS, ActionResult.FAIL);
-            game.setRule(GameRuleType.PVP, ActionResult.FAIL);
+            if (!config.mapConfig().pvp()){
+                game.setRule(GameRuleType.PVP, ActionResult.FAIL);
+            }
             game.setRule(GameRuleType.HUNGER, ActionResult.FAIL);
             game.setRule(GameRuleType.FALL_DAMAGE, ActionResult.FAIL);
             game.setRule(GameRuleType.INTERACTION, ActionResult.FAIL);
@@ -109,6 +130,7 @@ public class ParkourRaceActive {
         if (!this.participants.containsKey(PlayerRef.of(player))) {
             this.spawnSpectator(player);
         }
+        this.teams.addPlayerTo(player, TEAM.key());
     }
 
     private void removePlayer(ServerPlayerEntity player) {
@@ -175,6 +197,7 @@ public class ParkourRaceActive {
                     }
                 }
 
+                boolean gameWon = false;
                 if (gameMap.finish.contains(player.getBlockPos()) && !gameWon) {
                     this.broadcastWin(new WinResult(player, true));
                 }

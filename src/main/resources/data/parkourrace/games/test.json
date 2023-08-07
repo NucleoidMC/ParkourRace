@@ -4,7 +4,8 @@
   "icon": "minecraft:feather",
   "map": {
     "id": "parkourrace:test",
-    "effects": []
+    "effects": [],
+    "pvp": true
   },
   "players": {
     "min": 1,

@@ -13,6 +13,7 @@ import me.WesleyH.parkourrace.game.map.ParkourRaceMapGenerator;
 import xyz.nucleoid.plasmid.game.common.GameWaitingLobby;
 import xyz.nucleoid.plasmid.game.event.GameActivityEvents;
 import xyz.nucleoid.plasmid.game.event.GamePlayerEvents;
+import xyz.nucleoid.stimuli.event.player.PlayerDamageEvent;
 import xyz.nucleoid.stimuli.event.player.PlayerDeathEvent;
 
 public class ParkourRaceWaiting {
@@ -47,6 +48,7 @@ public class ParkourRaceWaiting {
             game.listen(GamePlayerEvents.ADD, waiting::addPlayer);
             game.listen(GamePlayerEvents.OFFER, (offer) -> offer.accept(world, Vec3d.ZERO));
             game.listen(PlayerDeathEvent.EVENT, waiting::onPlayerDeath);
+            game.listen(PlayerDamageEvent.EVENT, waiting::onPlayerDamage);
         });
     }
 
@@ -60,6 +62,11 @@ public class ParkourRaceWaiting {
     }
 
     private ActionResult onPlayerDeath(ServerPlayerEntity player, DamageSource source) {
+        player.setHealth(20.0f);
+        this.spawnPlayer(player);
+        return ActionResult.FAIL;
+    }
+    private ActionResult onPlayerDamage(ServerPlayerEntity player, DamageSource source, float v){
         player.setHealth(20.0f);
         this.spawnPlayer(player);
         return ActionResult.FAIL;
