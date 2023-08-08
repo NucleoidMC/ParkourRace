@@ -1,9 +1,9 @@
 {
-  "type": "parkourrace:parkourrace",
+  "type": "parkourrace:parkour_race",
   "name": "Parkour Race: Boxed",
   "icon": "minecraft:feather",
   "map": {
-    "id": "parkourrace:boxed",
+    "id": "parkour_race:boxed",
     "effects": [{
       "effect": "minecraft:speed",
       "duration": 0,

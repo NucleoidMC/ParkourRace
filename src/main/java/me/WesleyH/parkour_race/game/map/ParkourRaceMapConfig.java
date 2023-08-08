@@ -1,4 +1,4 @@
-package me.WesleyH.parkourrace.game.map;
+package me.WesleyH.parkour_race.game.map;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

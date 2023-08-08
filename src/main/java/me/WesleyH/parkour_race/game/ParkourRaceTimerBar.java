@@ -1,4 +1,4 @@
-package me.WesleyH.parkourrace.game;
+package me.WesleyH.parkour_race.game;
 
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.text.Text;

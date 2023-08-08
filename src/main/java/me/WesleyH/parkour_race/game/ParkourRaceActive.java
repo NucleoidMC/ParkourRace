@@ -1,8 +1,6 @@
-package me.WesleyH.parkourrace.game;
+package me.WesleyH.parkour_race.game;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import me.WesleyH.parkourrace.ParkourRace;
+import me.WesleyH.parkour_race.ParkourRace;
 import net.minecraft.scoreboard.AbstractTeam;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.Vec3d;
@@ -26,11 +24,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.GameMode;
-import me.WesleyH.parkourrace.game.map.ParkourRaceMap;
+import me.WesleyH.parkour_race.game.map.ParkourRaceMap;
 import xyz.nucleoid.stimuli.event.player.PlayerDamageEvent;
 import xyz.nucleoid.stimuli.event.player.PlayerDeathEvent;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 

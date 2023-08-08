@@ -1,4 +1,4 @@
-package me.WesleyH.parkourrace.game;
+package me.WesleyH.parkour_race.game;
 
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
@@ -8,8 +8,8 @@ import xyz.nucleoid.plasmid.game.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameMode;
-import me.WesleyH.parkourrace.game.map.ParkourRaceMap;
-import me.WesleyH.parkourrace.game.map.ParkourRaceMapGenerator;
+import me.WesleyH.parkour_race.game.map.ParkourRaceMap;
+import me.WesleyH.parkour_race.game.map.ParkourRaceMapGenerator;
 import xyz.nucleoid.plasmid.game.common.GameWaitingLobby;
 import xyz.nucleoid.plasmid.game.event.GameActivityEvents;
 import xyz.nucleoid.plasmid.game.event.GamePlayerEvents;

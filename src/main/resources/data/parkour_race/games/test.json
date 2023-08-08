@@ -1,9 +1,9 @@
 {
-  "type": "parkourrace:parkourrace",
+  "type": "parkourrace:parkour_race",
   "name": "Parkour Race: Test",
   "icon": "minecraft:feather",
   "map": {
-    "id": "parkourrace:test",
+    "id": "parkour_race:test",
     "effects": [],
     "pvp": true
   },

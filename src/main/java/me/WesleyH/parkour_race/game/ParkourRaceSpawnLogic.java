@@ -1,6 +1,6 @@
-package me.WesleyH.parkourrace.game;
+package me.WesleyH.parkour_race.game;
 
-import me.WesleyH.parkourrace.game.map.ParkourRaceMapEffectConfig;
+import me.WesleyH.parkour_race.game.map.ParkourRaceMapEffectConfig;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.math.Vec3d;
@@ -10,8 +10,8 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.GameMode;
-import me.WesleyH.parkourrace.ParkourRace;
-import me.WesleyH.parkourrace.game.map.ParkourRaceMap;
+import me.WesleyH.parkour_race.ParkourRace;
+import me.WesleyH.parkour_race.game.map.ParkourRaceMap;
 
 import java.util.HashMap;
 import java.util.List;

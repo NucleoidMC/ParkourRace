@@ -1,8 +1,8 @@
-package me.WesleyH.parkourrace.game;
+package me.WesleyH.parkour_race.game;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import me.WesleyH.parkourrace.game.map.ParkourRaceMapConfig;
+import me.WesleyH.parkour_race.game.map.ParkourRaceMapConfig;
 import xyz.nucleoid.plasmid.game.common.config.PlayerConfig;
 
 public record ParkourRaceConfig

@@ -1,4 +1,4 @@
-package me.WesleyH.parkourrace.game.map;
+package me.WesleyH.parkour_race.game.map;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.gen.chunk.ChunkGenerator;

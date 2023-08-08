@@ -1,4 +1,4 @@
-package me.WesleyH.parkourrace.game;
+package me.WesleyH.parkour_race.game;
 
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "parkourrace",
+  "id": "parkou_race",
   "version": "${version}",
   "name": "Parkour-Race",
   "description": "Parkour race game",
@@ -11,7 +11,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.WesleyH.parkourrace.ParkourRace"
+      "me.WesleyH.parkour_race.ParkourRace"
     ]
   },
   "depends": {
