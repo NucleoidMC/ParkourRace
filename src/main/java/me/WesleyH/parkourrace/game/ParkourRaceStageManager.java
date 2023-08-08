@@ -19,7 +19,7 @@ import java.util.Set;
 public class ParkourRaceStageManager {
     private long closeTime = -1;
     public long finishTime = -1;
-    private long startTime = -1;
+    public long startTime = -1;
     private final Object2ObjectMap<ServerPlayerEntity, FrozenPlayer> frozen;
     private boolean setSpectator = false;
     private boolean pvpEnabled = false;

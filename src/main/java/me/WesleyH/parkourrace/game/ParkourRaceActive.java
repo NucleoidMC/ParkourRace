@@ -199,7 +199,7 @@ public class ParkourRaceActive {
                             !spawnLogic.playerCurCheckpoint.get(player).equals(checkpointBound))) {
                         spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
                         this.gameSpace.getPlayers().sendMessage((
-                        Text.literal("§6§lCHECKPOINT! §a" + player.getDisplayName().getString() + " §7has reached checkpoint §e" + i)));
+                        Text.literal("§6§lCHECKPOINT! §a" + player.getDisplayName().getString() + " §7has reached checkpoint §e" + i + " §7at §a" + getTime())));
                     }
                 }
 
@@ -216,7 +216,7 @@ public class ParkourRaceActive {
 
         Text message;
         if (winningPlayer != null) {
-            message = winningPlayer.getDisplayName().copy().append(" has won the game!").formatted(Formatting.GOLD);
+            message = winningPlayer.getDisplayName().copy().append(" has won the game in " + getTime() + "!").formatted(Formatting.GREEN);
         } else {
             message = Text.literal("The game ended, but nobody won!").formatted(Formatting.GOLD);
         }
@@ -226,6 +226,17 @@ public class ParkourRaceActive {
         players.playSound(SoundEvents.ENTITY_VILLAGER_YES);
         onClose();
 
+    }
+
+    private String getTime(){
+        double timeSinceStart = (this.world.getTime() - this.stageManager.startTime)/20.0;
+        long minutes = (long) (timeSinceStart / 60);
+        long seconds = (long) (timeSinceStart % 60);
+        double decimals = timeSinceStart - Math.floor(timeSinceStart);
+        String numberString = Double.toString(decimals);
+        int decimalIndex = numberString.indexOf(".");
+        String decimalPart = numberString.substring(decimalIndex, decimalIndex + 3);
+        return String.format("%02d:%02d", minutes, seconds) + decimalPart;
     }
 
     private WinResult checkWinResult() {
