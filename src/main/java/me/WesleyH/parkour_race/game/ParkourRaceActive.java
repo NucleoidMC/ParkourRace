@@ -232,7 +232,13 @@ public class ParkourRaceActive {
         double decimals = timeSinceStart - Math.floor(timeSinceStart);
         String numberString = Double.toString(decimals);
         int decimalIndex = numberString.indexOf(".");
-        String decimalPart = numberString.substring(decimalIndex, decimalIndex + 3);
+        String decimalPart;
+        if (numberString.length() -1 - decimalIndex >= 3){
+            decimalPart = numberString.substring(decimalIndex, decimalIndex + 3);
+
+        }else{
+            decimalPart = ".00";
+        }
         return String.format("%02d:%02d", minutes, seconds) + decimalPart;
     }
 
