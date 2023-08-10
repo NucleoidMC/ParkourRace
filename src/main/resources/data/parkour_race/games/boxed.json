@@ -1,6 +1,5 @@
 {
   "type": "parkour_race:parkour_race",
-  "name": "Parkour Race: Boxed",
   "icon": "minecraft:red_wool",
   "map": {
     "id": "parkour_race:boxed",

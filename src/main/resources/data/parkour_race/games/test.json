@@ -1,6 +1,5 @@
 {
   "type": "parkour_race:parkour_race",
-  "name": "Parkour Race: Test",
   "icon": "minecraft:feather",
   "map": {
     "id": "parkour_race:test",
