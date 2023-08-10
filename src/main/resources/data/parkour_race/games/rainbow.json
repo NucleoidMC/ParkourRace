@@ -1,19 +1,19 @@
 {
   "type": "parkour_race:parkour_race",
-  "name": "Parkour Race: Boxed",
-  "icon": "minecraft:red_wool",
+  "name": "Parkour Race: Rainbow",
+  "icon": "minecraft:yellow_wool",
   "map": {
-    "id": "parkour_race:boxed",
+    "id": "parkour_race:rainbow",
     "effects": [{
       "effect": "minecraft:speed",
       "duration": 0,
-      "amplifier": 0
+      "amplifier": 9
     }],
-    "pvp": false
+    "pvp": true
   },
   "players": {
     "min": 1,
     "max": 100
   },
-  "time_limit_secs": 600
+  "time_limit_secs": 300
 }
