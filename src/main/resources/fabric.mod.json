@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "parkou_race",
+  "id": "parkour_race",
   "version": "${version}",
   "name": "Parkour-Race",
   "description": "Parkour race game",

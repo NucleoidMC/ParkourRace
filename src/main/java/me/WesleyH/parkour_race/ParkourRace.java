@@ -9,7 +9,7 @@ import me.WesleyH.parkour_race.game.ParkourRaceConfig;
 import me.WesleyH.parkour_race.game.ParkourRaceWaiting;
 public class ParkourRace implements ModInitializer {
 
-    public static final String ID = "parkourrace";
+    public static final String ID = "parkour_race";
     public static final Logger LOGGER = LogManager.getLogger(ID);
 
     public static final GameType<ParkourRaceConfig> TYPE = GameType.register(
