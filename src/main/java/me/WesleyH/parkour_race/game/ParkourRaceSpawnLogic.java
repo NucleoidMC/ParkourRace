@@ -85,6 +85,6 @@ public class ParkourRaceSpawnLogic {
             z = (checkpoint.max().getZ() + checkpoint.min().getZ()) /2.0;
             y = checkpoint.max().getY();
         }
-        player.teleport(this.world, x, y, z, 0.0F, 0.0F);
+        player.teleport(this.world, x, y, z, player.getYaw(), player.getPitch());
     }
 }

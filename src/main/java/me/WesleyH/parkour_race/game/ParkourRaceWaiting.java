@@ -63,12 +63,12 @@ public class ParkourRaceWaiting {
 
     private ActionResult onPlayerDeath(ServerPlayerEntity player, DamageSource source) {
         player.setHealth(20.0f);
-        this.spawnPlayer(player);
+        spawnLogic.spawnPlayer(player);
         return ActionResult.FAIL;
     }
     private ActionResult onPlayerDamage(ServerPlayerEntity player, DamageSource source, float v){
         player.setHealth(20.0f);
-        this.spawnPlayer(player);
+        spawnLogic.spawnPlayer(player);
         return ActionResult.FAIL;
     }
 
