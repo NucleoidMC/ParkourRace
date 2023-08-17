@@ -7,6 +7,8 @@ import xyz.nucleoid.map_templates.MapTemplate;
 import xyz.nucleoid.plasmid.game.world.generator.TemplateChunkGenerator;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class ParkourRaceMap {
     private final MapTemplate template;
@@ -14,6 +16,7 @@ public class ParkourRaceMap {
     public BlockBounds spawn;
     public ArrayList<BlockBounds> checkpoints = new ArrayList<>();
     public BlockBounds finish;
+    public List<BlockBounds> deathBounds = new ArrayList<>();
     private final BlockBounds bounds;
 
     public ParkourRaceMap(MapTemplate template, ParkourRaceMapConfig config) {

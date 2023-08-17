@@ -187,6 +187,13 @@ public class ParkourRaceActive {
             if (player != null && !player.isSpectator()) {
                 if (!mapBounds.contains(player.getBlockPos())) {
                     spawnLogic.spawnPlayer(player);
+                    break;
+                }
+                for (BlockBounds deathBoundary : this.gameMap.deathBounds){
+                    if (deathBoundary.contains(player.getBlockPos())){
+                        spawnLogic.spawnPlayer(player);
+                        break;
+                    }
                 }
                 int i = 0;
                 for (BlockBounds checkpointBound : this.gameMap.checkpoints) {
@@ -197,12 +204,14 @@ public class ParkourRaceActive {
                         spawnLogic.playerCurCheckpoint.put(player, checkpointBound);
                         this.gameSpace.getPlayers().sendMessage((
                         Text.literal("§6§lCHECKPOINT! §a" + player.getDisplayName().getString() + " §7has reached checkpoint §e" + i + " §7at §a" + getTime())));
+                    break;
                     }
                 }
 
                 boolean gameWon = false;
                 if (gameMap.finish.contains(player.getBlockPos()) && !gameWon) {
                     this.broadcastWin(new WinResult(player, true));
+                    break;
                 }
             }
         }

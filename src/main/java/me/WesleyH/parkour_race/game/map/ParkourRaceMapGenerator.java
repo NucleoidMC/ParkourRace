@@ -36,6 +36,8 @@ public class ParkourRaceMapGenerator {
                 }
             }
             map.finish = template.getMetadata().getFirstRegionBounds("finish");
+
+            map.deathBounds = template.getMetadata().getRegionBounds("death").toList();
             return map;
 
         }
